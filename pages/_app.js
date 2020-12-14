@@ -4,6 +4,7 @@ import { theme } from "../styles/theme";
 import { ReactQueryCacheProvider, QueryCache } from "react-query";
 import SearchProvider from "../context/searchContext";
 import { Hydrate } from "react-query/hydration";
+import "../components/Posts.css";
 
 const queryCache = new QueryCache({
   defaultConfig: {
