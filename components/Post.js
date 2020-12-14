@@ -3,7 +3,6 @@ import React, { useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 const PostWrapper = styled.div`
-  border-radius: 0.2rem;
   overflow: hidden;
   /* position: relative; */
   display: flex;
@@ -103,7 +102,7 @@ export default function Post({ post, i }) {
       : post.thumbnail;
 
   //Fix formatting of url
-  const fixUrl = (url) => url.replaceAll("&amp;", "&");
+  const fixUrl = url().replaceAll("&amp;", "&");
   return (
     <>
       <PostWrapper className={i}>
@@ -126,7 +125,7 @@ export default function Post({ post, i }) {
                   console.log(e);
                 }}
                 ref={imageRef}
-                src={fixUrl(url())}
+                src={fixUrl}
                 alt="dsa"
               />
             </a>

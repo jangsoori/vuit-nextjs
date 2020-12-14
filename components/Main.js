@@ -13,6 +13,15 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
+  @media only screen and (max-width: 500px) {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 3rem;
+    p {
+      align-self: center;
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 const Subreddit = styled.p`
@@ -40,7 +49,6 @@ export default function Main({ data, isLoading, isFetching }) {
       setSubreddits([]);
     };
   }, [data]);
-
   const renderSubbreditNames = () => {
     if (subreddits.length === 1) {
       return subreddits.map((subreddit) => {

@@ -5,6 +5,13 @@ import styled from "@emotion/styled";
 const SearchWrapper = styled.section`
   display: flex;
   height: 100%;
+  justify-self: end;
+  @media only screen and (max-width: 500px) {
+    /* margin-top: 2rem; */
+
+    margin-left: auto;
+    margin-right: auto;
+  }
 `;
 const Icon = styled.i`
   color: white;
@@ -15,27 +22,29 @@ const Icon = styled.i`
 
 const Form = styled.form`
   display: flex;
-  line-height: 1;
 `;
 const Label = styled.label`
   background: #888;
   color: white;
+  height: 100%;
+  align-self: center;
   padding: 1rem 2rem;
-  padding-right: 0;
-  border-radius: 0.5rem 0 0 0.5rem;
+  padding-right: 0.1rem;
+  border-radius: 0.2rem 0 0 0.2rem;
   color: white;
   font-family: inherit;
   font-size: 2rem;
 `;
 const Input = styled.input`
   height: 100%;
-  display: block;
-  align-self: stretch;
+  display: flex;
   background: #888;
   border: none;
+  align-items: flex-start;
+  font-size: 2rem;
   padding: 1rem 2rem;
   padding-left: 0;
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0 0.2rem 0.2rem 0;
   color: white;
   font-family: inherit;
   font-size: 2rem;

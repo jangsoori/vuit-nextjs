@@ -4,10 +4,10 @@ import Masonry from "react-masonry-css";
 
 const breakpointColumnsObj = {
   default: 5,
-  1300: 4,
-  1100: 3,
-  700: 2,
-  500: 1,
+  1500: 4,
+  1200: 3,
+  900: 2,
+  600: 1,
 };
 export default function Posts({ data, isFetching, isLoading }) {
   const posts = data?.data.data.children.map((post) => {

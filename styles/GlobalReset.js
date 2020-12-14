@@ -34,7 +34,7 @@ export default function GlobalReset() {
           height: 100%;
         }
         body {
-          background: #222;
+          background: rgb(23, 23, 23);
         }
       `}
     />

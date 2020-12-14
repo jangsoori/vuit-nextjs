@@ -65,6 +65,9 @@ const Period = styled.select`
     border: black;
     font-family: "Quicksand";
   }
+  @media only screen and (max-width: 500px) {
+    grid-row: 2/3;
+  }
 `;
 const Filter = styled.li`
   padding: 0.25rem 0.5rem;
@@ -74,6 +77,10 @@ const Filter = styled.li`
   font-size: 1.6rem;
   cursor: pointer;
   transition: 0.2s all;
+  &::first-letter {
+    text-transform: uppercase;
+  }
+
   &:hover {
     background: white;
     color: black;
