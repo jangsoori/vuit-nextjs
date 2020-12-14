@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 const PostWrapper = styled.div`
-  border-radius: 1rem;
+  border-radius: 0.2rem;
   overflow: hidden;
   /* position: relative; */
   display: flex;
@@ -85,7 +85,7 @@ export default function Post({ post, i }) {
       return false;
     }
   };
-  const { author, created_utc, permalink } = post;
+  const { author, created_utc, permalink, score } = post;
 
   //Get time of post creation converted from epoch time
   const time = dayjs.unix(created_utc)["$d"].toString();
@@ -173,6 +173,7 @@ export default function Post({ post, i }) {
                 u/{author}
               </Author>
             </Detail>
+            <Detail>{score} upvotes</Detail>
           </Details>
         </Meta>
       </PostWrapper>
