@@ -38,43 +38,45 @@ export default function PaginationBtns({ data, isFetching }) {
   const { query } = useRouter();
   return (
     <Wrapper>
-      <Arrow>
+      <Arrow
+        onClick={() => {
+          setQ({
+            ...q,
+            before: "",
+            after: data?.nextPage,
+            //!Magic
+            //Due to reddit API and cursor pagination, I had to look at URL in order to determine "count" from the API which is needed to paginate. If there is "after" parameter, or there is nothing at all (after or before), add 25 to count. If there is "before", substract 1. if count is 1, reset it to 0 to start paginating correctly from the beginning. Else, substract 26. It ensures correct list of posts.
+            count:
+              query.after || (!query.after && !query.before)
+                ? q.count + 25
+                : query.before
+                ? q.count - 1
+                : q.count === 1
+                ? q.count - 1
+                : q.count - 26,
+          });
+        }}
+      >
         <button
           disabled={isFetching}
-          onClick={() => {
-            setQ({
-              ...q,
-              before: "",
-              after: data?.nextPage,
-              //!Magic
-              //Due to reddit API and cursor pagination, I had to look at URL in order to determine "count" from the API which is needed to paginate. If there is "after" parameter, or there is nothing at all (after or before), add 25 to count. If there is "before", substract 1. if count is 1, reset it to 0 to start paginating correctly from the beginning. Else, substract 26. It ensures correct list of posts.
-              count:
-                query.after || (!query.after && !query.before)
-                  ? q.count + 25
-                  : query.before
-                  ? q.count - 1
-                  : q.count === 1
-                  ? q.count - 1
-                  : q.count - 26,
-            });
-          }}
           className="fas fa-arrow-right fa-4x"
         ></button>
       </Arrow>
-      <Arrow>
-        <button //Count = 26 is first page (after paginating back. That's how reddit API works... my brain!)
-          disabled={q.count === 26 || isFetching}
-          onClick={() => {
-            setQ({
-              ...q,
-              after: "",
-              before: data?.prevPage,
+      <Arrow
+        onClick={() => {
+          setQ({
+            ...q,
+            after: "",
+            before: data?.prevPage,
 
-              //!Magic
-              //Due to reddit API and cursor pagination, I had to look at URL in order to determine "count" from the API which is needed to paginate. If there is NOT "before" parameter, add one to Count. If there is, substract 25 from it. It ensures correct list of posts.
-              count: !query.before ? q.count + 1 : q.count - 25,
-            });
-          }}
+            //!Magic
+            //Due to reddit API and cursor pagination, I had to look at URL in order to determine "count" from the API which is needed to paginate. If there is NOT "before" parameter, add one to Count. If there is, substract 25 from it. It ensures correct list of posts.
+            count: !query.before ? q.count + 1 : q.count - 25,
+          });
+        }}
+      >
+        <button //Count = 26 is first page (after paginating back. That's how reddit API works... my brain!)
+          disabled={q.count === 26 || isFetching || !q.after}
           className="fas fa-arrow-left fa-4x"
         ></button>
       </Arrow>
