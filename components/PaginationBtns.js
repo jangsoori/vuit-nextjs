@@ -5,11 +5,17 @@ import { QueryContext } from "../context/queryContext";
 
 const Wrapper = styled.div`
   margin-bottom: 2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  position: fixed;
+  left: 0;
+  bottom: 5rem;
+  width: 100%;
+  gap: 3rem;
 `;
 const Arrow = styled.div`
   cursor: pointer;
-  position: fixed;
-  bottom: 5rem;
+  position: relative;
   background: white;
   width: 6rem;
   height: 6rem;
@@ -18,10 +24,15 @@ const Arrow = styled.div`
   box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.5);
   z-index: 10;
   &:first-of-type {
-    right: 45%;
+    grid-column: 2/3;
+    grid-row: 1/2;
+    justify-self: start;
   }
   &:last-of-type {
-    left: 45%;
+    grid-row: 1/2;
+    justify-self: end;
+
+    grid-column: 1/2;
   }
   > * {
     cursor: pointer;
@@ -76,7 +87,7 @@ export default function PaginationBtns({ data, isFetching }) {
         }}
       >
         <button //Count = 26 is first page (after paginating back. That's how reddit API works... my brain!)
-          disabled={q.count === 26 || isFetching || !q.after}
+          disabled={q.count === 26 || isFetching}
           className="fas fa-arrow-left fa-4x"
         ></button>
       </Arrow>
