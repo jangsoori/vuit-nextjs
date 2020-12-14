@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 const PostWrapper = styled.div`
@@ -9,20 +9,19 @@ const PostWrapper = styled.div`
   display: flex;
   flex-direction: column;
   /* width: 400px; */
-  height: 100%;
+  /* height: 100%; */
+  width: 100%;
 `;
 const ImageWrapper = styled.div`
   position: relative;
   display: flex;
   width: 100%;
+  height: 100%;
   a:first-of-type {
     line-height: 0;
     width: 100%;
   }
   a:last-of-type {
-  }
-  img {
-    width: 100%;
   }
 `;
 const LinkExternalImage = styled.i`
@@ -36,8 +35,10 @@ const LinkExternalImage = styled.i`
     color: #ccc;
   }
 `;
-const Image = styled.img`
+const Img = styled.img`
   cursor: pointer;
+  width: 100%;
+  height: 100%;
 `;
 const Meta = styled.section`
   background: #333;
@@ -73,7 +74,6 @@ const Author = styled.a`
 
 const Detail = styled.p``;
 export default function Post({ post, i }) {
-  const [spans, setSpans] = useState("");
   const [loaded, setLoaded] = useState(false);
   const imageRef = useRef();
   const metaRef = useRef();
@@ -93,25 +93,6 @@ export default function Post({ post, i }) {
   dayjs.extend(relativeTime);
   //Calculate time since post creation
   const createdAgo = dayjs(time).fromNow();
-  useEffect(() => {
-    //IF post has image, set grid spans according to image height and meta text height, if not, just take height of meta and render.
-    if (hasImage()) {
-      //This allows browser to get image height after it is loaded. It displayed as "0" before that, because it tried to get data when the image was not loaded.
-      //We need to wait for image to load, then set spans.
-      imageRef?.current?.addEventListener("load", () => {
-        setSpans(
-          Math.ceil(
-            (imageRef?.current?.clientHeight + metaRef?.current?.clientHeight) /
-              10 +
-              1
-          )
-        );
-      });
-    } else {
-      //We don't need to wait for text to load, so just set spans.
-      setSpans(Math.ceil(metaRef?.current?.clientHeight / 10 + 1));
-    }
-  }, [imageRef, metaRef]);
 
   //Get image url if post has image
   const url = () =>
@@ -125,14 +106,7 @@ export default function Post({ post, i }) {
   const fixUrl = (url) => url.replaceAll("&amp;", "&");
   return (
     <>
-      <PostWrapper
-        className={i}
-        style={
-          (loaded && hasImage()) || !hasImage()
-            ? { gridRowEnd: `span ${spans}` }
-            : { display: "none" }
-        }
-      >
+      <PostWrapper className={i}>
         {/* If there is image, render it. If not, ignore. */}
         {hasImage() && (
           <ImageWrapper>
@@ -140,8 +114,11 @@ export default function Post({ post, i }) {
               href={`https://www.reddit.com${permalink}`}
               target="_blank"
               rel="noreferrer"
+              style={{
+                position: "relative",
+              }}
             >
-              <Image
+              <Img
                 onLoad={() => {
                   setLoaded(true);
                 }}
