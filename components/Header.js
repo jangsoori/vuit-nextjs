@@ -17,7 +17,7 @@ const Logo = styled.h1`
 export default function Header() {
   return (
     <StyledHeader>
-      <Logo>vu.it</Logo>
+      <Logo>lurk.it</Logo>
       <Search />
     </StyledHeader>
   );
