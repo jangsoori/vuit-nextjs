@@ -15,6 +15,7 @@ const Sort = styled.ul`
   grid-auto-flow: column;
   gap: 1rem;
   align-items: center;
+  align-content: center;
 `;
 const SortText = styled.p`
   color: white;
@@ -23,56 +24,60 @@ const SortText = styled.p`
 const Period = styled.select`
   display: block;
   font-size: 16px;
-  font-family: inherit;
+  font-family: "Quicksand";
   font-weight: 500;
-  color: #000;
-  line-height: 1.3;
+  color: white;
+  line-height: 1;
   padding: 0.4rem 2rem;
+  padding-left: 0;
   width: 100%;
   max-width: 100%; /* useful when width is set to anything other than 100% */
   box-sizing: border-box;
   margin: 0;
-  border: 1px solid #aaa;
-  box-shadow: 0 1px 0 1px rgba(0, 0, 0, 0.04);
-  border-radius: 0.5em;
+  border: none;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #fff;
-  background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23007CB2%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.5-12.8z%22%2F%3E%3C%2Fsvg%3E"),
-    linear-gradient(to bottom, #ffffff 0%, #e5e5e5 100%);
+  background: ${({ theme }) => theme.colors.secondary};
+
+  background-image: url("/arrow-down.svg");
   background-repeat: no-repeat, repeat;
   /* arrow icon position (1em from the right, 50% vertical) , then gradient position*/
-  background-position: right 0.7em top 50%, 0 0;
+  background-position: right 0.3rem top 50%, 0 0;
   /* icon size, then gradient */
-  background-size: 0.65em auto, 100%;
+  /* background-size: 0.65em auto, 100%; */
   /* Hide arrow icon in IE browsers */
   &::-ms-expand {
     display: none;
   }
   :hover {
-    border-color: #888;
+    /* border-color: #888; */
   }
   :focus {
-    border-color: #555;
+    /* border-color: #555; */
     /* It'd be nice to use -webkit-focus-ring-color here but it doesn't work on box-shadow */
-    box-shadow: 0 0 1px 3px #555;
-
-    color: #222;
+    color: white;
     outline: none;
   }
   option {
     font-weight: normal;
+    width: 100%;
+    border: black;
+    font-family: "Quicksand";
   }
 `;
 const Filter = styled.li`
   padding: 0.25rem 0.5rem;
-  background: #888;
+  /* background: #888; */
   color: white;
   border-radius: 0.5rem;
   font-size: 1.6rem;
   cursor: pointer;
-
+  transition: 0.2s all;
+  &:hover {
+    background: white;
+    color: black;
+  }
   ${({ selected }) =>
     selected &&
     css`
@@ -104,7 +109,7 @@ export default function SortFilters() {
       <Sort>{renderFilters()}</Sort>
       {(query.s === "top" || query.s === "controversial") && (
         <>
-          <SortText>Time period</SortText>
+          {/* <SortText>Time period</SortText> */}
           <Period
             onChange={(e) => setQ({ ...q, t: e.target.value })}
             value={query.t}
