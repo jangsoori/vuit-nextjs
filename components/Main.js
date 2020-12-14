@@ -52,9 +52,7 @@ export default function Main({ data, isLoading, isFetching }) {
   };
   return (
     <MainWrapper>
-      <Head>
-        {data && <title>lurk.it - r/{subreddits.join(" ,r/")}</title>}
-      </Head>
+      <Head>{data && <title>lurk.it - r/{subreddits.join(", ")}</title>}</Head>
       <Header>
         <Subreddit>{subreddits && renderSubbreditNames()}</Subreddit>
         <SortFilters />
