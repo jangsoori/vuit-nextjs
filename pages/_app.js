@@ -15,6 +15,7 @@ const queryCache = new QueryCache({
 
 import styled from "@emotion/styled";
 import QueryProvider from "../context/queryContext";
+import Head from "next/head";
 const StyledApp = styled.div`
   font-family: "Quicksand";
   background: ${({ theme }) => theme.colors.primary};
@@ -25,6 +26,9 @@ const StyledApp = styled.div`
 function MyApp({ Component, pageProps }) {
   return (
     <>
+      <Head>
+        <title>lurk.it - Just reddit content</title>
+      </Head>
       <GlobalReset />
       <ThemeProvider theme={theme}>
         <StyledApp>

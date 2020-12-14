@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import SortFilters from "./SortFilters";
 import Posts from "./Posts";
 import Loading from "./Loader";
+import Head from "next/head";
 import PaginationBtns from "./PaginationBtns";
 import Loader from "react-spinners/ClipLoader";
 const MainWrapper = styled.section`
@@ -24,6 +25,7 @@ const Subreddit = styled.p`
   font-weight: bold;
 `;
 export default function Main({ data, isLoading, isFetching }) {
+  console.log(data);
   const [subreddits, setSubreddits] = useState([]);
   useEffect(() => {
     const subNames = [
@@ -50,6 +52,9 @@ export default function Main({ data, isLoading, isFetching }) {
   };
   return (
     <MainWrapper>
+      <Head>
+        {data && <title>lurk.it - r/{subreddits.join(" ,r/")}</title>}
+      </Head>
       <Header>
         <Subreddit>{subreddits && renderSubbreditNames()}</Subreddit>
         <SortFilters />
