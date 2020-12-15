@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { useRouter } from "next/router";
 import React, { useContext } from "react";
@@ -13,10 +14,11 @@ const Wrapper = styled.div`
   width: 100%;
   gap: 3rem;
 `;
-const Arrow = styled.div`
+const Arrow = styled.button`
   cursor: pointer;
   position: relative;
   background: white;
+  border: none;
   width: 6rem;
   height: 6rem;
   color: black;
@@ -43,6 +45,12 @@ const Arrow = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
+  ${({ disabled }) =>
+    disabled &&
+    css`
+      background: #aaa;
+      pointer-events: none;
+    `};
 `;
 export default function PaginationBtns({ data, isFetching }) {
   const { q, setQ } = useContext(QueryContext);
@@ -67,12 +75,9 @@ export default function PaginationBtns({ data, isFetching }) {
                 : q.count - 26,
           });
         }}
-      >
-        <button
-          disabled={isFetching}
-          className="fas fa-arrow-right fa-4x"
-        ></button>
-      </Arrow>
+        disabled={isFetching || !data?.nextPage}
+        className="fas fa-arrow-right fa-4x"
+      ></Arrow>
       <Arrow
         onClick={() => {
           setQ({
@@ -85,12 +90,10 @@ export default function PaginationBtns({ data, isFetching }) {
             count: !query.before ? q.count + 1 : q.count - 25,
           });
         }}
-      >
-        <button //Count = 26 is first page (after paginating back. That's how reddit API works... my brain!)
-          disabled={q.count === 26 || isFetching}
-          className="fas fa-arrow-left fa-4x"
-        ></button>
-      </Arrow>
+        //Count = 26 is first page (after paginating back. That's how reddit API works... my brain!)
+        disabled={q.count === 26 || isFetching || !data?.prevPage}
+        className="fas fa-arrow-left fa-4x"
+      ></Arrow>
     </Wrapper>
   );
 }
