@@ -6,6 +6,7 @@ import Loading from "./Loader";
 import Head from "next/head";
 import PaginationBtns from "./PaginationBtns";
 import Loader from "react-spinners/ClipLoader";
+import { css } from "@emotion/react";
 const MainWrapper = styled.section`
   /* height: 200vh; */
 `;
@@ -32,9 +33,34 @@ const Subreddit = styled.p`
   position: relative;
   font-family: "Quicksand";
   font-weight: bold;
+  cursor: default;
+  ${({ isMulti }) =>
+    isMulti &&
+    css`
+      &:hover div {
+        opacity: 1;
+        visibility: none;
+      }
+    `}
+`;
+const Detail = styled.div`
+  position: absolute;
+  background: ${({ theme }) => theme.colors.secondary};
+  z-index: 2;
+  padding: 1rem;
+  font-size: 1.6rem;
+  font-weight: normal;
+  width: 33rem;
+  margin-top: 1rem;
+  border-radius: 0.2rem;
+  opacity: 0;
+  visibility: none;
+  transition: all 0.2s;
+  span {
+    font-weight: 500;
+  }
 `;
 export default function Main({ data, isLoading, isFetching }) {
-  console.log(data);
   const [subreddits, setSubreddits] = useState([]);
   useEffect(() => {
     const subNames = [
@@ -62,7 +88,13 @@ export default function Main({ data, isLoading, isFetching }) {
     <MainWrapper>
       <Head>{data && <title>lurk.it - r/{subreddits.join(", ")}</title>}</Head>
       <Header>
-        <Subreddit>{subreddits && renderSubbreditNames()}</Subreddit>
+        <Subreddit isMulti={subreddits.length > 1}>
+          {subreddits && renderSubbreditNames()}{" "}
+          <Detail>
+            You are now browsing multiple subreddits:{" "}
+            <span>r/{subreddits.join(", ")}</span>
+          </Detail>
+        </Subreddit>
         <SortFilters />
       </Header>
       {isFetching ? (
