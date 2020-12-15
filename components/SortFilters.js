@@ -7,6 +7,7 @@ import { SearchContext } from "../context/searchContext";
 const Filters = styled.section`
   display: grid;
   grid-auto-flow: column;
+
   gap: 1rem;
   align-items: center;
 `;
@@ -35,6 +36,7 @@ const Period = styled.select`
   box-sizing: border-box;
   margin: 0;
   border: none;
+  padding-left: 0.2rem;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -70,6 +72,7 @@ const Period = styled.select`
   }
 `;
 const Filter = styled.li`
+  text-align: center;
   padding: 0.25rem 0.5rem;
   /* background: #888; */
   color: white;
@@ -126,7 +129,7 @@ export default function SortFilters() {
             <option value="week">Last week</option>
             <option value="month">Last month</option>
             <option value="year">Last year</option>
-            <option value="all">all</option>
+            <option value="all">All time</option>
           </Period>
         </>
       )}
