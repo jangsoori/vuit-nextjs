@@ -3,7 +3,7 @@ module.exports = {
     return [
       {
         source: "/",
-        destination: `/reddit/subreddits/posts?r=earthporn%2Bpics`,
+        destination: `/reddit/subreddits/posts?r=earthporn`,
         permanent: true,
       },
     ];
