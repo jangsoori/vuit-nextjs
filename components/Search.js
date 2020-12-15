@@ -53,29 +53,8 @@ export default function Search() {
   const { setInput, input } = useContext(SearchContext);
   const { setQ, q } = useContext(QueryContext);
 
+  console.log(input);
   return (
-    // <form
-    //   action=""
-    //   onSubmit={(e) => {
-    //     e.preventDefault();
-    //     //Reset state
-    //     setQ({
-    //       r: [input],
-    //       s: "hot",
-    //       t: "week",
-    //       after: "",
-    //       before: "",
-    //       count: 0,
-    //     });
-    //   }}
-    // >
-    //   <input
-    //     type="text"
-    //     value={input}
-    //     onChange={(e) => setInput(e.target.value)}
-    //   />
-    //   <button>search</button>
-    // </form>
     <SearchWrapper>
       <Form
         onSubmit={(e) => {
@@ -102,7 +81,13 @@ export default function Search() {
       <Icon
         className="fas fa-search fa-2x"
         onClick={() => {
-          setInput(input);
+          setInput([input]);
+        }}
+      />
+      <Icon
+        className="fas fa-plus fa-2x"
+        onClick={() => {
+          setQ({ ...q, r: [...q.r, input] });
         }}
       />
     </SearchWrapper>
