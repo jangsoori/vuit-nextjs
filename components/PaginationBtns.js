@@ -49,7 +49,8 @@ const Arrow = styled.button`
     disabled &&
     css`
       background: #aaa;
-      pointer-events: none;
+      ${"" /* pointer-events: none; */}
+      cursor: not-allowed;
     `};
 `;
 export default function PaginationBtns({ data, isFetching }) {
