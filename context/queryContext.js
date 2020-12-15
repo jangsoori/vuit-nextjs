@@ -14,7 +14,6 @@ export default function QueryProvider({ children }) {
     count: query.count || 0,
   });
 
-  console.log(query);
   return (
     <QueryContext.Provider value={{ q, setQ }}>
       {children}
