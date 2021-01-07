@@ -38,6 +38,7 @@ const Subreddit = styled.p`
     isMulti &&
     isOpenMulti &&
     css`
+      ${"" /* Subreddit names div */}
       div {
         opacity: 1;
         visibility: none;
@@ -97,8 +98,10 @@ export default function Main({ data, isLoading, isFetching }) {
   };
   return (
     <MainWrapper>
+      {/* Change website title (add subreddits) */}
       <Head>{data && <title>lurk.it - r/{subreddits.join(", ")}</title>}</Head>
       <Header>
+        {/* Render subreddits in multireddit (if it is multireddit) on arrow click */}
         <Subreddit isMulti={subreddits.length > 1} isOpenMulti={openMulti}>
           {subreddits && renderSubbreditNames()}{" "}
           <Detail>
@@ -111,8 +114,7 @@ export default function Main({ data, isLoading, isFetching }) {
                     <i
                       style={{ color: "red", cursor: "pointer" }}
                       onClick={() => {
-                        const index = subreddits.indexOf(sub);
-                        console.log(index);
+                        //Remove subreddit from multireddit on click
                         setSubreddits((prev) => {
                           return prev.filter((item) => {
                             return item !== sub;
@@ -129,6 +131,7 @@ export default function Main({ data, isLoading, isFetching }) {
         </Subreddit>
         <SortFilters />
       </Header>
+      {/* Render posts or loading component if still loading items. */}
       {isFetching ? (
         <Loading size={50} />
       ) : (
