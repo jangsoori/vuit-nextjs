@@ -34,10 +34,11 @@ const Subreddit = styled.p`
   font-family: "Quicksand";
   font-weight: bold;
   cursor: default;
-  ${({ isMulti }) =>
+  ${({ isMulti, isOpenMulti }) =>
     isMulti &&
+    isOpenMulti &&
     css`
-      &:hover div {
+      div {
         opacity: 1;
         visibility: none;
       }
@@ -56,12 +57,13 @@ const Detail = styled.div`
   opacity: 0;
   visibility: none;
   transition: all 0.2s;
-  span {
+  div p {
     font-weight: 500;
   }
 `;
 export default function Main({ data, isLoading, isFetching }) {
   const [subreddits, setSubreddits] = useState([]);
+  const [openMulti, setOpenMulti] = useState(false);
   useEffect(() => {
     const subNames = [
       ...new Set(
@@ -81,18 +83,48 @@ export default function Main({ data, isLoading, isFetching }) {
         return <span>r/{subreddit}</span>;
       });
     } else if (subreddits.length > 1) {
-      return <span>Multireddit</span>;
+      return (
+        <>
+          <i
+            style={{ marginRight: "1rem", cursor: "pointer" }}
+            onClick={() => setOpenMulti(!openMulti)}
+            className="fas fa-arrow-down"
+          ></i>
+          <span>Multireddit</span>
+        </>
+      );
     }
   };
   return (
     <MainWrapper>
       <Head>{data && <title>lurk.it - r/{subreddits.join(", ")}</title>}</Head>
       <Header>
-        <Subreddit isMulti={subreddits.length > 1}>
+        <Subreddit isMulti={subreddits.length > 1} isOpenMulti={openMulti}>
           {subreddits && renderSubbreditNames()}{" "}
           <Detail>
             You are now browsing multiple subreddits:{" "}
-            <span>r/{subreddits.join(", ")}</span>
+            <div>
+              {subreddits.map((sub) => {
+                return (
+                  <p>
+                    {sub}{" "}
+                    <i
+                      style={{ color: "red", cursor: "pointer" }}
+                      onClick={() => {
+                        const index = subreddits.indexOf(sub);
+                        console.log(index);
+                        setSubreddits((prev) => {
+                          return prev.filter((item) => {
+                            return item !== sub;
+                          });
+                        });
+                      }}
+                      className="fas fa-minus-circle"
+                    ></i>
+                  </p>
+                );
+              })}{" "}
+            </div>
           </Detail>
         </Subreddit>
         <SortFilters />
