@@ -34,9 +34,9 @@
 
 ## Images
 
-[![Home page](./readmeImg/lurk_1.gif)]()
+![Home page](./readmeImg/lurk_1.png)
 
-[![Favourites page](./readmeImg/lurk_2.gif)]()
+![Favourites page](./readmeImg/lurk_2.png)
 
 ## Cool GIF
 
