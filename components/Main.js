@@ -128,10 +128,11 @@ export default function Main({ data, isLoading, isFetching }) {
                         });
                         //Set query to new subreddits (to refetch)
                         setQ({
-                          ...q,
+                          // ...q,
                           r: q.r.filter(
                             (item) => item.toLowerCase() !== sub.toLowerCase()
                           ),
+                          s: "hot",
                         });
                       }}
                       className="fas fa-minus-circle"
