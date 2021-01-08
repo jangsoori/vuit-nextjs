@@ -6,11 +6,8 @@ const SearchWrapper = styled.section`
   display: flex;
   height: 100%;
   justify-self: end;
-  @media only screen and (max-width: 500px) {
-    /* margin-top: 2rem; */
-
-    margin-left: auto;
-    margin-right: auto;
+  @media only screen and (max-width: 550px) {
+    justify-self: start;
   }
 `;
 const Icon = styled.i`

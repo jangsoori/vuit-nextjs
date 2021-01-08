@@ -14,12 +14,12 @@ const Header = styled.header`
   display: flex;
   align-items: center;
   margin-bottom: 1rem;
-  @media only screen and (max-width: 500px) {
+  @media only screen and (max-width: 550px) {
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 3rem;
     p {
-      align-self: center;
+      /* align-self: center; */
       margin-bottom: 2rem;
     }
   }
@@ -60,6 +60,10 @@ const Detail = styled.div`
   transition: all 0.2s;
   div p {
     font-weight: 500;
+    margin: 0;
+  }
+  @media only screen and (max-width: 550px) {
+    /* left: -50%; */
   }
 `;
 export default function Main({ data, isLoading, isFetching }) {
