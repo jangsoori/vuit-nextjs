@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import SortFilters from "./SortFilters";
 import Posts from "./Posts";
 import Loading from "./Loader";
@@ -7,6 +7,7 @@ import Head from "next/head";
 import PaginationBtns from "./PaginationBtns";
 import Loader from "react-spinners/ClipLoader";
 import { css } from "@emotion/react";
+import { QueryContext } from "../context/queryContext";
 const MainWrapper = styled.section`
   /* height: 200vh; */
 `;
@@ -69,6 +70,7 @@ const Detail = styled.div`
 export default function Main({ data, isLoading, isFetching }) {
   const [subreddits, setSubreddits] = useState([]);
   const [openMulti, setOpenMulti] = useState(false);
+  const { q, setQ } = useContext(QueryContext);
   useEffect(() => {
     const subNames = [
       ...new Set(
@@ -118,11 +120,18 @@ export default function Main({ data, isLoading, isFetching }) {
                     <i
                       style={{ color: "red", cursor: "pointer" }}
                       onClick={() => {
-                        //Remove subreddit from multireddit on click
+                        // Remove subreddit from multireddit on click
                         setSubreddits((prev) => {
                           return prev.filter((item) => {
                             return item !== sub;
                           });
+                        });
+                        //Set query to new subreddits (to refetch)
+                        setQ({
+                          ...q,
+                          r: q.r.filter(
+                            (item) => item.toLowerCase() !== sub.toLowerCase()
+                          ),
                         });
                       }}
                       className="fas fa-minus-circle"
