@@ -1,30 +1,58 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Moooovi - all your movies in one place!
 
-## Getting Started
+> Web application that allows users to search movies and save them to "favourites" or "watch later" list
 
-First, run the development server:
+## Stack
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+- Next.js
+- Styled components with Emotion
+- Reddit API
+- Vercel for deployment
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+- View Images and Posts of any subreddit
+- Connect subreddits to create multireddit
+- Sort posts within subreddits
+- Paginate subreddits
 
-## Learn More
+## Todo
 
-To learn more about Next.js, take a look at the following resources:
+- Work on accessibility
+- Introduce multi-image posts
+- Improve error handling
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Live
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- Live version available here - [Click](https://vuit-nextjs.vercel.app)
 
-## Deploy on Vercel
+## Change log
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/import?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**v.1.00**
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Functional app, wohooo!
+
+## Images
+
+[![Home page](./readmeImg/lurk_1.gif)]()
+
+[![Favourites page](./readmeImg/lurk_2.gif)]()
+
+## Cool GIF
+
+![Cool GIF](./readmeImg/demo.gif)
+
+## Installation
+
+- First, install all dependencies by running: npm install
+- Then, start development server: npm run dev
+- It will start local server: localhost:3000
+- Does not require API Key
+
+### Clone
+
+- Clone this repo to your local machine using `https://github.com/jangsoori/vuit-nextjs`
+
+## License
+
+[![License](http://img.shields.io/:license-mit-blue.svg?style=flat-square)](http://badges.mit-license.org)
