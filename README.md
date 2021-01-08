@@ -1,6 +1,6 @@
-# Moooovi - all your movies in one place!
+# Lurk.it - reddit posts for lurkers
 
-> Web application that allows users to search movies and save them to "favourites" or "watch later" list
+> Web application that allows users to browse subreddits on reddit, without any bloat content.
 
 ## Stack
 
