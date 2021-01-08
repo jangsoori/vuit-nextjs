@@ -26,7 +26,7 @@ const Header = styled.header`
   }
 `;
 
-const Subreddit = styled.p`
+const Subreddit = styled.div`
   color: white;
   font-size: 2rem;
   font-weight: 500;
@@ -86,8 +86,8 @@ export default function Main({ data, isLoading, isFetching }) {
   }, [data]);
   const renderSubbreditNames = () => {
     if (subreddits.length === 1) {
-      return subreddits.map((subreddit) => {
-        return <span>r/{subreddit}</span>;
+      return subreddits.map((subreddit, i) => {
+        return <span key={i}>r/{subreddit}</span>;
       });
     } else if (subreddits.length > 1) {
       return (
@@ -113,9 +113,9 @@ export default function Main({ data, isLoading, isFetching }) {
           <Detail>
             You are now browsing multiple subreddits:{" "}
             <div>
-              {subreddits.map((sub) => {
+              {subreddits.map((sub, i) => {
                 return (
-                  <p>
+                  <p key={i}>
                     {sub}{" "}
                     <i
                       style={{ color: "red", cursor: "pointer" }}
