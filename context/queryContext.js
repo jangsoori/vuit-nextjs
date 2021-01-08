@@ -6,7 +6,7 @@ export const QueryContext = createContext();
 export default function QueryProvider({ children }) {
   const { query } = useRouter();
   const [q, setQ] = useState({
-    r: query.r.split(" ") || "earthporn",
+    r: query.r?.split(" ") || "earthporn",
     s: query.s || "hot",
     t: query.t || "week",
     after: query.after || "",
