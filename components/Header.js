@@ -25,6 +25,7 @@ const Logo = styled.a`
   font-size: 2.4rem;
   color: white;
   cursor: pointer;
+  width: max-content;
 `;
 
 export default function Header() {
